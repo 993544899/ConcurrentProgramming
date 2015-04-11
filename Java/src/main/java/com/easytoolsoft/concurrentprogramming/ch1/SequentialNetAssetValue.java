@@ -2,7 +2,7 @@ package com.easytoolsoft.concurrentprogramming.ch1;
 
 import java.util.List;
 
-import com.easytoolsoft.concurrentprogramming.util.SinaFinanceUitls;
+import com.easytoolsoft.concurrentprogramming.util.SinaFinanceUtils;
 
 /**
  * 
@@ -14,7 +14,7 @@ public class SequentialNetAssetValue extends AbstractNetAssetValue {
 	public double computeNetAssetValue(final List<String> tickers) throws Exception {
 		double netAssetValue = 0.0;
 		for (String ticker : tickers) {
-			netAssetValue += 1000 * SinaFinanceUitls.getCurrentStockPrice(ticker);
+			netAssetValue += 1000 * SinaFinanceUtils.getCurrentStockPrice(ticker);
 		}
 		return netAssetValue;
 	}

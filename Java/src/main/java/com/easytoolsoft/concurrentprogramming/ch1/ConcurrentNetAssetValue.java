@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import com.easytoolsoft.concurrentprogramming.util.SinaFinanceUitls;
+import com.easytoolsoft.concurrentprogramming.util.SinaFinanceUtils;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class ConcurrentNetAssetValue extends AbstractNetAssetValue {
 			tasks.add(new Callable<Double>() {
 				@Override
 				public Double call() throws Exception {
-					return 1000 * SinaFinanceUitls.getCurrentStockPrice(ticker);
+					return 1000 * SinaFinanceUtils.getCurrentStockPrice(ticker);
 				}
 			});
 		}

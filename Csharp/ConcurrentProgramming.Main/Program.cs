@@ -19,7 +19,7 @@ namespace ConcurrentProgramming.Main
             CliCommand cliCommand = (CliCommand)Activator.CreateInstance(Type.GetType(typeName));
             cliCommand.Execute(args);
 
-            //Console.Read();
+            Console.Read();
         }
     }
 }

@@ -1,7 +1,9 @@
 package com.easytoolsoft.concurrentprogramming.cli;
 
 import com.easytoolsoft.concurrentprogramming.ch1.ConcurrentNetAssetValue;
+import com.easytoolsoft.concurrentprogramming.ch1.ConcurrentPrimeFinder;
 import com.easytoolsoft.concurrentprogramming.ch1.SequentialNetAssetValue;
+import com.easytoolsoft.concurrentprogramming.ch1.SequentialPrimeFinder;
 
 public class Ch1CliCommand implements CliCommand {
 
@@ -50,7 +52,24 @@ public class Ch1CliCommand implements CliCommand {
 	}
 
 	private void executePrimeCli(final String[] args) {
+		String arg2 = args[2];
+		// cli:Ch1 prime seq 100000000
+		if ("seq".equals(arg2)) {
+			int number = Integer.valueOf(args[3]);
+			new SequentialPrimeFinder(number).run();
+			return;
+		}
 
+		// cli:Ch1 prime con 100000000 4 4
+		if ("con".equals(arg2)) {
+			int number = Integer.parseInt(args[3]);
+			int threadPoolSize = Integer.parseInt(args[4]);
+			int chunkCount = Integer.parseInt(args[5]);
+			new ConcurrentPrimeFinder(number, threadPoolSize, chunkCount).run();
+			return;
+		}
+
+		System.out.println("Not Found Command!");
 	}
 
 }

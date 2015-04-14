@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 
- * 并发执行计算出指定范围内(如1-1000万)的素数
+ * 并发执行计算出指定范围内(如1-2000万)的素数
  *
  */
 public class ConcurrentPrimeFinder extends AbstractPrimeFinder {
@@ -19,18 +19,22 @@ public class ConcurrentPrimeFinder extends AbstractPrimeFinder {
 
 	/**
 	 * 
+	 * @param number
+	 *            最大数字
 	 * @param theThreadPoolSize
 	 *            线程池大小
 	 * @param theChunkCount
 	 *            区间个数
 	 */
-	public ConcurrentPrimeFinder(final int theThreadPoolSize, final int theChunkCount) {
+	public ConcurrentPrimeFinder(final int number,
+			final int theThreadPoolSize, final int theChunkCount) {
+		super(number);
 		this.threadPoolSize = theThreadPoolSize;
 		this.chunkCount = theChunkCount;
 	}
 
 	@Override
-	public int countPrimes(final int number) {
+	protected int countPrimes(final int number) {
 		int count = 0;
 
 		try {
@@ -65,12 +69,19 @@ public class ConcurrentPrimeFinder extends AbstractPrimeFinder {
 		return count;
 	}
 
+	@Override
+	protected void before() {
+		System.out.println(">>>>并发执行计算出指定范围内的素数<<<<");
+		System.out.printf("CPU核心数 :%s,线程个数：%s,区间个数:%s \n",
+				Runtime.getRuntime().availableProcessors(), this.threadPoolSize, this.chunkCount);
+		super.before();
+	}
+
 	public static void main(final String[] args) {
-		// 数字上限，线程池大小，区间个数
-		System.out.println("参数格式为: number,threadPoolSize,chunkCount");
+		// 参数格式为: 数字上限(number)，线程池大小(threadPoolSize)，区间个数(chunkCount)
 		int number = 10000000;// Integer.parseInt(args[0]);
 		int threadPoolSize = 4;// Integer.parseInt(args[1]);
 		int chunkCount = 4;// Integer.parseInt(args[2]);
-		new ConcurrentPrimeFinder(threadPoolSize, chunkCount).run(number);
+		new ConcurrentPrimeFinder(number, threadPoolSize, chunkCount).run();
 	}
 }

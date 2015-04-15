@@ -38,7 +38,7 @@ public class ConcurrentPrimeFinder extends AbstractPrimeFinder {
 		int count = 0;
 
 		try {
-			final List<Callable<Integer>> tasks = new ArrayList<Callable<Integer>>();
+			final List<Callable<Integer>> tasks = new ArrayList<Callable<Integer>>(2000);
 			//
 			// 每个区间的大小,即有多少个数字
 			final int chunkSize = number / chunkCount;

@@ -53,14 +53,14 @@ public class Ch1CliCommand implements CliCommand {
 
 	private void executePrimeCli(final String[] args) {
 		String arg2 = args[2];
-		// cli:Ch1 prime seq 100000000
+		// cli:Ch1 prime seq 10000000
 		if ("seq".equals(arg2)) {
 			int number = Integer.valueOf(args[3]);
 			new SequentialPrimeFinder(number).run();
 			return;
 		}
 
-		// cli:Ch1 prime con 100000000 4 4
+		// cli:Ch1 prime con 10000000 4 4
 		if ("con".equals(arg2)) {
 			int number = Integer.parseInt(args[3]);
 			int threadPoolSize = Integer.parseInt(args[4]);

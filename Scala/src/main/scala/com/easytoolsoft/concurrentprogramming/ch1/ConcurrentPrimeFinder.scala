@@ -1,5 +1,6 @@
 package com.easytoolsoft.concurrentprogramming.ch1
 
+import java.util.ArrayList
 import java.util.concurrent.Callable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -12,13 +13,13 @@ class ConcurrentPrimeFinder(number: Int,
                             chunkCount: Int) extends AbstractPrimeFinder(number) {
 
   override protected def countPrimes(number: Int): Int = {
-    val tasks = List[Callable[Integer]]()
+    val tasks = new ArrayList[Callable[Integer]](100)
     val chunkSize = number / chunkCount
-    for (i <- 0 to chunkCount) {
+    for (i <- 0 to chunkCount - 1) {
       val lowerNumber = (i * chunkSize) + 1
       val upperNumber = if (i == chunkCount - 1) number else (lowerNumber + chunkSize - 1)
       tasks.add(new Callable[Integer]() {
-        def call(): Int = {
+        def call(): Integer = {
           ConcurrentPrimeFinder.this.countPrimesInRange(lowerNumber, upperNumber)
         }
       })

@@ -1,6 +1,5 @@
 package com.easytoolsoft.concurrentprogramming.ch1
 
-import org.scalacheck.Prop.False
 
 abstract class AbstractPrimeFinder(protected val number: Int) {
   protected def run() {
@@ -10,7 +9,7 @@ abstract class AbstractPrimeFinder(protected val number: Int) {
     val numberOfPrimes = this.countPrimes(this.number)
     val endTime = System.nanoTime()
 
-    System.out.printf("[1-%d]内有： (%d)个素数", this.number.toString, numberOfPrimes.toString)
+    System.out.printf("[1-%s]内有： (%s)个素数.\n", this.number.toString, numberOfPrimes.toString)
     System.out.println("耗时(单位秒): " + (endTime - startTime) / 1.0e9)
     System.out.println("====================结束====================")
   }
@@ -28,7 +27,7 @@ abstract class AbstractPrimeFinder(protected val number: Int) {
   private def isPrime(number: Int): Boolean = {
     if (number <= 1)
       false
-    for (i <- 2 to Math.sqrt(number).toInt) {
+    for (i <- 2 to Math.sqrt(number).ceil.toInt) {
       if (number % i == 0)
         return false
     }
